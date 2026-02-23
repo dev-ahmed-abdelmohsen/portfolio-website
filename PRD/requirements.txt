@@ -1,0 +1,116 @@
+1. Project Overview
+Create a highly optimized, responsive personal portfolio website for a DevOps, Software, and Cloud Engineer. The application must utilize an "App Shell" architecture, separating fixed navigation/profile components from a central dynamic content container that updates on route changes.
+
+2. Tech Stack & Configuration
+Framework: Next.js 15 (App Router).
+
+Language: TypeScript (Strict mode enabled).
+
+Styling: Tailwind CSS (Dark mode by default, utilizing a geometric polygon background pattern).
+
+UI Components: Shadcn UI (for buttons, cards, badges, and form elements).
+
+Icons: Lucide React.
+
+Animations: Framer Motion (for smooth fade-in page transitions in the dynamic container).
+
+Content: MDX (for the technical blog).
+
+3. Directory Structure Guidelines
+Enforce a clean, maintainable architecture within the src/ or root directory:
+
+app/layout.tsx: Houses the App Shell (Global Wrapper, Profile Header, Sidebar, Footer).
+
+app/page.tsx: The About page (default route).
+
+app/(routes)/[name]/page.tsx: Grouped dynamic routes for /resume, /portfolio, /blog, and /contact.
+
+components/layout/: App Shell components (ProfileCard.tsx, Sidebar.tsx, Footer.tsx).
+
+components/ui/: Reusable Shadcn UI components.
+
+lib/: Utility functions (e.g., cn for Tailwind class merging).
+
+data/: Static JSON or TS files containing experience, project, and blog metadata to keep UI components clean.
+
+4. App Shell Architecture (Fixed Components)
+These elements must be rendered in layout.tsx and persist across all page navigations.
+
+Profile Header (<ProfileCard />): Top horizontal container.
+
+Name: Ahmed
+
+Roles: DevOps Engineer | Software Engineer | Systems Administrator
+
+Quick Details Grid: Email address, "Download CV" button, Location (Egypt), and a simulated System Status indicator with a green pulse emoji indicating "Operational".
+
+Left Navigation (<Sidebar />): Vertical, pill-shaped floating menu docked to the left on desktop, bottom bar on mobile.
+
+Links: About, Resume, Portfolio, Blog, Contact.
+
+Feature: Active route must be visually highlighted with a distinct primary color.
+
+Footer (<StatusFooter />): Sticky bottom-center text.
+
+Text: "All systems are operational." linked to a mock uptime page.
+
+5. Dynamic Route Content Specifications
+The children prop in layout.tsx will render these pages inside a large, styled main container.
+
+/ (About Page)
+Bio Section: A professional summary highlighting an IT degree from EELU (Graduated June 2025) and a focus on modern cloud-native solutions, infrastructure provisioning, and automation.
+
+"What I'm Doing" Grid: Four elegant cards detailing core focus areas:
+
+DevOps (CI/CD, automation).
+
+Cloud Engineering (AWS, infrastructure as code).
+
+Site Reliability Engineering (SRE).
+
+Software Development (Back-end, Full-stack Java).
+
+/resume (Experience & Skills Page)
+Timeline Component: A vertical, chronological timeline.
+
+Jan 2026 - Present: Cloud DevOps Intern at Ivolve Technologies / NTI Hire Ready Program.
+
+Oct 2025 - Present: Freelance Systems Administrator & DevOps.
+
+May 2025 - Oct 2025: DevOps Engineer at Stealth Automotive Startup.
+
+Mar 2024 - Sep 2024: DevOps Trainee at Digital Egypt Pioneers Initiative (DEPI).
+
+Jun 2023 - Sep 2023: Cybersecurity Trainee at EELU.
+
+Skills Grid: Grouped visual badges.
+
+Cloud & Orchestration: AWS, Kubernetes, Red Hat, OpenShift.
+
+Development: Java, Front-end, Back-end.
+
+/portfolio (Projects & Community Page)
+Filterable Grid: Cards with hover effects, filterable by tags.
+
+Project 1: Scalable 3-tier web architecture on AWS (High-availability web application).
+
+Project 2: Healthcare Startup Platform (Connecting nurses with patients).
+
+Community/Talks: "Intro to DevOps" - Presentation for 3,500 students at the Chinese University in Cairo (Feb 2026).
+
+/blog (Technical Writing)
+A grid of article cards pulling from MDX files, focused on documenting learning journeys in Cloud, Kubernetes, and AWS.
+
+/contact (Get in Touch)
+Clean Shadcn UI form (Name, Email, Message).
+
+Toggle/Badge indicating: "Open for opportunities: Yes".
+
+6. AI Generation Directives
+Build the layout skeleton first before populating individual pages.
+
+Default to React Server Components. Use "use client" strictly only when hooks (useState, usePathname for active nav links) or Framer Motion animations are required.
+
+Ensure absolute mobile responsiveness. The side navigation must collapse into a hamburger menu or bottom bar on screens smaller than md.
+
+Keep the code modular. Do not hardcode massive text blocks directly into the page components; map over data arrays where possible.
