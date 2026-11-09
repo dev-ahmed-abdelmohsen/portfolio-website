@@ -8,17 +8,15 @@ export const profile = {
   initials: "AS",
   alternateName: "Shams Systems",
   roles: [
-    "DevOps & Hybrid Infrastructure",
-    "On-Premises & Private Cloud",
-    "Workflow Automation (n8n & MCP)",
+    "DevOps & Cloud Engineer",
   ],
   email: "ashams3719262@gmail.com",
   location: "Cairo, Egypt",
   cvUrl: "/resume",
   status: "Operational",
-  bio: `DevOps & Hybrid Infrastructure Engineer specializing in on-premises enterprise platforms, private cloud infrastructure, and declarative GitOps delivery.
+  bio: `DevOps & Cloud Engineer working across the full delivery lifecycle—from architecture planning and provisioning to deployment, security, and operations.
 
-Operating at Fixed Misr (FEDIS), I engineer resilient physical and virtualized systems, automate containerized workloads with Kubernetes, and provision reproducible environments with Infrastructure as Code. Beyond traditional operations, I build modern automation pipelines—orchestrating event-driven workflows with n8n and developing AI agent integrations via the Model Context Protocol (MCP) to eliminate operational toil.`,
+Collaborating with fast-paced startups and enterprise environments (including on-premises engineering at Fixed Misr), I build resilient cloud platforms and automated delivery pipelines. My specialized focus spans continuous delivery with GitOps, robust DevSecOps practices (embedding SAST, DAST, and secrets governance directly into CI/CD), and modern workflow automation to eliminate manual toil.`,
   socialLinks: {
     github: "https://github.com/dev-ahmed-abdelmohsen",
     linkedin: "https://www.linkedin.com/in/dev-ahmed-abdelmohsen",

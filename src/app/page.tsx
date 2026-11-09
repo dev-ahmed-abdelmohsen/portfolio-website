@@ -7,13 +7,13 @@ import {
 } from "@/data/about";
 import {
   ArrowUpRight,
-  Briefcase,
   GraduationCap,
   Layers,
   Terminal,
-  ExternalLink,
   ShieldCheck,
-  CheckCircle2,
+  Cpu,
+  Workflow,
+  GitBranch,
 } from "lucide-react";
 
 export default function AboutPage() {
@@ -35,7 +35,7 @@ export default function AboutPage() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
-            Available for Strategic Roles
+            Available for Strategic Roles &amp; Consultations
           </span>
         </div>
 
@@ -46,27 +46,27 @@ export default function AboutPage() {
           ))}
         </div>
 
-        {/* Quick Facts Strip (Zero arbitrary percentages) */}
+        {/* Quick Scope Strip */}
         <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3 text-xs">
           <div className="rounded-xl border border-border/70 bg-secondary/30 p-3">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Active Role</p>
-            <p className="mt-1 font-semibold text-foreground">Fixed Misr (FEDIS)</p>
-            <p className="text-[11px] text-muted-foreground">DevOps Engineer</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Delivery Scope</p>
+            <p className="mt-1 font-semibold text-foreground">Full DevOps Lifecycle</p>
+            <p className="text-[11px] text-muted-foreground">Plan → Deploy → Operate</p>
           </div>
           <div className="rounded-xl border border-border/70 bg-secondary/30 p-3">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Specialization</p>
-            <p className="mt-1 font-semibold text-foreground">On-Premises &amp; Hybrid</p>
-            <p className="text-[11px] text-muted-foreground">Private Cloud &amp; Infra</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Security Focus</p>
+            <p className="mt-1 font-semibold text-foreground">DevSecOps &amp; Compliance</p>
+            <p className="text-[11px] text-muted-foreground">SAST · DAST · Vault</p>
           </div>
           <div className="rounded-xl border border-border/70 bg-secondary/30 p-3">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Delivery Model</p>
-            <p className="mt-1 font-semibold text-foreground">Declarative GitOps</p>
-            <p className="text-[11px] text-muted-foreground">ArgoCD &amp; Kubernetes</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Automation Focus</p>
+            <p className="mt-1 font-semibold text-foreground">Event-Driven &amp; AI</p>
+            <p className="text-[11px] text-muted-foreground">n8n · Model Context Protocol</p>
           </div>
           <div className="rounded-xl border border-border/70 bg-secondary/30 p-3">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Next-Gen Tooling</p>
-            <p className="mt-1 font-semibold text-foreground">n8n &amp; MCP</p>
-            <p className="text-[11px] text-muted-foreground">Workflow &amp; AI Agents</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Environments</p>
+            <p className="mt-1 font-semibold text-foreground">Startups &amp; Enterprise</p>
+            <p className="text-[11px] text-muted-foreground">Cloud &amp; On-Premises</p>
           </div>
         </div>
       </section>
@@ -77,10 +77,10 @@ export default function AboutPage() {
       <section aria-labelledby="pillars-heading">
         <div className="border-b border-border/60 pb-3">
           <h2 id="pillars-heading" className="text-xl font-bold tracking-tight text-foreground">
-            Core Engineering Pillars
+            Core Technical Disciplines
           </h2>
           <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-            Architectural competencies focused on high availability, operational consistency, and elimination of manual toil.
+            Specialized engineering capabilities across the entire development lifecycle, security automation, and operational infrastructure.
           </p>
         </div>
 
@@ -125,59 +125,54 @@ export default function AboutPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════
-          3. CURRENT PRODUCTION ENVIRONMENT
+          3. LIFECYCLE EXECUTION (Plan -> Secure -> Operate)
       ═══════════════════════════════════════════════ */}
-      <section aria-labelledby="environment-heading">
+      <section aria-labelledby="lifecycle-heading">
         <div className="rounded-2xl border border-border/80 bg-gradient-to-br from-card to-secondary/30 p-5 sm:p-6 shadow-sm dark:bg-secondary/20">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/60 pb-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md shadow-primary/25">
-                <Briefcase className="h-5 w-5" />
-              </div>
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Active Production Role</span>
-                <h3 id="environment-heading" className="text-base sm:text-lg font-bold text-foreground">
-                  DevOps Engineer @ Fixed Misr (FEDIS)
-                </h3>
-              </div>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Execution Standard</span>
+              <h3 id="lifecycle-heading" className="text-base sm:text-lg font-bold text-foreground">
+                End-to-End DevOps Lifecycle Execution
+              </h3>
             </div>
-            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-              2025 – Present · Production Standard
+            <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+              Startups &amp; Enterprise Platforms
             </span>
           </div>
 
           <p className="mt-4 text-xs sm:text-sm leading-relaxed text-muted-foreground">
-            Leading on-premises infrastructure stability, private virtualization clusters, and enterprise release automation. Spearheading the adoption of GitOps pipelines and automated operational workflows across production workloads.
+            Whether architecting scalable platforms for international startups or hardening physical infrastructure in enterprise settings, I maintain rigorous standards across all phases of delivery:
           </p>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
             <div className="rounded-xl border border-border/60 bg-card/60 p-3.5 dark:bg-card/40">
               <p className="flex items-center gap-1.5 text-xs font-bold text-foreground">
-                <Terminal className="h-4 w-4 text-primary" />
-                <span>Systems Engineering</span>
+                <GitBranch className="h-4 w-4 text-primary" />
+                <span>1. Plan &amp; Provision</span>
               </p>
               <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
-                Enterprise Linux configurations, bare-metal hypervisors, network segmentations, and high-availability clustered services.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-border/60 bg-card/60 p-3.5 dark:bg-card/40">
-              <p className="flex items-center gap-1.5 text-xs font-bold text-foreground">
-                <Layers className="h-4 w-4 text-primary" />
-                <span>Container Platforms</span>
-              </p>
-              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
-                Multi-node Kubernetes cluster management, containerization standards with Docker, and declarative ArgoCD synchronization.
+                Infrastructure as Code via Terraform and Ansible. Designing multi-region cloud topologies and on-premises virtualization.
               </p>
             </div>
 
             <div className="rounded-xl border border-border/60 bg-card/60 p-3.5 dark:bg-card/40">
               <p className="flex items-center gap-1.5 text-xs font-bold text-foreground">
                 <ShieldCheck className="h-4 w-4 text-primary" />
-                <span>Automation &amp; Security</span>
+                <span>2. Secure &amp; Deliver</span>
               </p>
               <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
-                Event-driven n8n workflows, Model Context Protocol (MCP) tool bridges, and centralized secrets governance via HashiCorp Vault.
+                Shift-left DevSecOps with automated SAST and DAST gates, HashiCorp Vault secrets injection, and declarative GitOps pipelines with ArgoCD.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-border/60 bg-card/60 p-3.5 dark:bg-card/40">
+              <p className="flex items-center gap-1.5 text-xs font-bold text-foreground">
+                <Workflow className="h-4 w-4 text-primary" />
+                <span>3. Automate &amp; Operate</span>
+              </p>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                Multi-cluster Kubernetes operations, full-stack observability (Prometheus/ELK), and event-driven automation with n8n and MCP.
               </p>
             </div>
           </div>
@@ -191,17 +186,17 @@ export default function AboutPage() {
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/60 pb-3">
           <div>
             <h2 id="featured-work-heading" className="text-xl font-bold tracking-tight text-foreground">
-              Featured Architectural Blueprints
+              Featured Case Studies
             </h2>
             <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-              Selected production delivery platforms, open-source cloud tooling, and automation architectures.
+              Specialized production delivery platforms, security gateways, and automated architectures.
             </p>
           </div>
           <Link
             href="/portfolio"
             className="group inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
           >
-            <span>Explore All 9 Projects</span>
+            <span>View All Projects</span>
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
@@ -261,7 +256,7 @@ export default function AboutPage() {
             Credentials &amp; Community
           </h2>
           <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-            Academic foundation, specialized industry tracks, and knowledge sharing.
+            Academic degree, specialized industry tracks, and engineering community contributions.
           </p>
         </div>
 
@@ -293,7 +288,7 @@ export default function AboutPage() {
           ))}
         </div>
 
-        {/* Link to Learning Paths and Resume */}
+        {/* Link to Learning Paths */}
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/20 bg-primary/5 p-4 text-xs">
           <div className="flex items-center gap-2">
             <GraduationCap className="h-5 w-5 text-primary" />
