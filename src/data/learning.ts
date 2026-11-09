@@ -485,6 +485,151 @@ export const learningTracks: LearningTrack[] = [
       },
     ],
   },
+  {
+    id: "devsecops-sast-dast-security-pipelines",
+    slug: "devsecops-sast-dast-security-pipelines",
+    title: "DevSecOps: Automated SAST, DAST & Pipeline Security Mastery",
+    targetCredential: "Certified DevSecOps Professional (CDP) & Cloud-Native Security Standard",
+    category: "Security",
+    status: "Active / In Progress",
+    level: "Specialist",
+    curriculumVersion: "2025/2026 Production DevSecOps & OWASP Standards",
+    summary:
+      "Production-grade study plan for embedding shift-left security verification across the continuous delivery pipeline. Covers automated Static Application Security Testing (SAST with Semgrep), Dynamic Application Security Testing (DAST with OWASP ZAP), pre-commit and pipeline secrets detection (Gitleaks), Software Composition Analysis (SCA with OWASP Dependency-Check & Grype), and admission policy enforcement (Kyverno).",
+    topicsList: [
+      "Shift-Left Architecture & Pipeline Security Gates",
+      "Static Application Security Testing (SAST with Semgrep)",
+      "Automated Pre-Commit & In-Pipeline Secrets Detection (Gitleaks)",
+      "Dynamic Application Security Testing (DAST with OWASP ZAP)",
+      "Software Composition Analysis (SCA) & Container Image Governance",
+    ],
+    coreCompetencies: [
+      "Automated Shift-Left Security Gateways with SARIF Vulnerability Aggregation",
+      "Custom SAST Pattern Authoring (Semgrep) for Insecure Code Detection",
+      "Zero-Leak Pre-Commit Hooks & History Scanning with Gitleaks",
+      "Automated DAST Baseline & Full API Security Scanning with OWASP ZAP",
+      "Software Bill of Materials (SBOM) Generation & Dependency Analysis with Grype",
+      "Kubernetes Admission Policy Hardening with Kyverno (Preventing Privileged Containers)",
+    ],
+    officialReference: {
+      name: "OWASP DevSecOps Guideline & Top 10",
+      url: "https://owasp.org/www-project-devsecops-guideline/",
+    },
+    relatedBlogSlug: "devsecops-pipeline-security",
+    modules: [
+      {
+        id: "sec-mod-1",
+        number: 1,
+        stepNumber: "Step 01",
+        title: "Shift-Left Security Architecture & Gate Enforcement",
+        focusArea: "DevSecOps Culture, Gateways & Break-Build Criteria",
+        summary:
+          "Design shift-left automated gates across pull requests and deployment stages. Define clear CVSS-based break-build thresholds preventing vulnerable code from advancing to production.",
+        objectives: [
+          "Define automated security criteria based on CVSS severity thresholds (blocking High/Critical vulnerabilities).",
+          "Integrate security scanning stages into multi-stage CI/CD pipelines (GitHub Actions / GitLab CI).",
+          "Normalize vulnerability findings using standard SARIF (Static Analysis Results Interchange Format) reports.",
+          "Author vulnerability exception policies and time-boxed security waiver lifecycles.",
+        ],
+        labScenario:
+          "Configure a CI/CD pipeline stage that ingests multi-tool SARIF findings and automatically fails the build if any unexempted Critical vulnerability is detected, while publishing actionable PR annotations.",
+        keyCommandsOrTools: [
+          "sarif-tools / github/codeql-action/upload-sarif",
+          "exit-code-on-threshold --severity CRITICAL",
+          "security-gate-policy.yaml",
+        ],
+      },
+      {
+        id: "sec-mod-2",
+        number: 2,
+        stepNumber: "Step 02",
+        title: "Static Application Security Testing (SAST with Semgrep)",
+        focusArea: "Source Code Analysis & Custom Security Rules",
+        summary:
+          "Deploy lightweight, high-speed SAST using Semgrep. Enforce language-agnostic security rules targeting SQL injection, XSS, SSRF, and custom organizational anti-patterns.",
+        objectives: [
+          "Integrate Semgrep CLI into continuous integration pipelines targeting pull requests.",
+          "Run OWASP Top 10 and CWE Top 25 rulepacks across polyglot codebases (Python, Node.js, Go, Java).",
+          "Author custom Semgrep pattern rules to detect internal insecure coding practices and deprecated cryptographic libraries.",
+          "Implement differential scanning (semgrep ci) to analyze changed files without slowing pipeline cycle times.",
+        ],
+        labScenario:
+          "Write a custom Semgrep YAML rule that flags unescaped SQL string concatenation and weak HMAC algorithms in a microservice codebase; verify that PRs violating the rule are blocked.",
+        keyCommandsOrTools: [
+          "semgrep scan --config auto --sarif --output semgrep.sarif",
+          "semgrep --config p/owasp-top-ten",
+          "semgrep --validate --config custom-rules.yaml",
+        ],
+      },
+      {
+        id: "sec-mod-3",
+        number: 3,
+        stepNumber: "Step 03",
+        title: "Pre-Commit & In-Pipeline Secrets Detection (Gitleaks)",
+        focusArea: "Zero-Leak Secrets Prevention & Git History Auditing",
+        summary:
+          "Prevent confidential tokens, private keys, and API credentials from ever reaching Git remotes using pre-commit hooks and automated CI verification with Gitleaks.",
+        objectives: [
+          "Configure developer workstation pre-commit hooks utilizing Gitleaks to block commits containing sensitive entropy.",
+          "Execute in-pipeline secret verification on all commits, pull requests, and merges.",
+          "Perform historical Git repository scans to uncover legacy leaked credentials and rotate compromised tokens.",
+          "Author custom regex patterns and baseline ignore files (.gitleaksignore) for authorized test stubs.",
+        ],
+        labScenario:
+          "Install a pre-commit hook that intercepts an accidental commit of a cloud API key; simulate a bypass attempt and verify that the remote CI Gitleaks check fails and rejects the push.",
+        keyCommandsOrTools: [
+          "gitleaks protect --staged --verbose",
+          "gitleaks detect --source . --report-path gitleaks.json",
+          "gitleaks git --log-opts='--all'",
+        ],
+      },
+      {
+        id: "sec-mod-4",
+        number: 4,
+        stepNumber: "Step 04",
+        title: "Dynamic Application Security Testing (DAST with OWASP ZAP)",
+        focusArea: "Runtime Penetration Testing & API Vulnerability Scanning",
+        summary:
+          "Execute automated runtime dynamic analysis against staging applications and RESTful APIs using OWASP ZAP, verifying real-world defenses against OWASP Top 10 attacks.",
+        objectives: [
+          "Deploy OWASP ZAP in containerized headless mode within staging deployment pipelines.",
+          "Configure automated baseline scans checking for security headers, cookie flags, and misconfigurations.",
+          "Execute full dynamic API scans utilizing OpenAPI / Swagger specifications to fuzz endpoints.",
+          "Tune ZAP context files, authentication session tokens, and alert thresholds to minimize false positives.",
+        ],
+        labScenario:
+          "Spin up an ephemeral staging environment, trigger a containerized OWASP ZAP API scan against its Swagger endpoint, simulate an XSS and missing CSP header, and generate an automated vulnerability summary report.",
+        keyCommandsOrTools: [
+          "docker run -t zaproxy/zap-stable zap-baseline.py -t https://staging.app",
+          "zap-api-scan.py -t openapi.json -f openapi",
+          "zap-full-scan.py -t https://staging.app -g gen.conf -r report.html",
+        ],
+      },
+      {
+        id: "sec-mod-5",
+        number: 5,
+        stepNumber: "Step 05",
+        title: "Software Composition Analysis (SCA) & Container Image Governance",
+        focusArea: "Dependency Vulnerabilities, SBOM & Admission Policies",
+        summary:
+          "Identify known CVEs in third-party libraries and container base images using OWASP Dependency-Check and Grype, generate SBOMs, and enforce Kyverno admission policies.",
+        objectives: [
+          "Execute Software Composition Analysis (SCA) with OWASP Dependency-Check to detect CVEs in open-source dependencies.",
+          "Generate Software Bill of Materials (SBOM) using Syft and scan container images for operating-system vulnerabilities with Grype.",
+          "Enforce Kyverno admission control policies in Kubernetes to block deployment of images with unfixed Critical CVEs or running as root.",
+          "Automate continuous dependency upgrade monitoring and patch verification.",
+        ],
+        labScenario:
+          "Scan a Docker image containing an outdated package with Grype; generate its CycloneDX SBOM with Syft; deploy a Kyverno ClusterPolicy that intercepts and denies deployment of any container image with Critical CVEs.",
+        keyCommandsOrTools: [
+          "grype <image-name> --fail-on high",
+          "syft <image-name> -o cyclonedx-json > sbom.json",
+          "dependency-check --project 'App' --scan ./",
+          "kubectl get clusterpolicy -A",
+        ],
+      },
+    ],
+  },
 ];
 
 export const allCategories: LearningCategory[] = [
