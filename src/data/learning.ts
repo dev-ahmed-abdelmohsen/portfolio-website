@@ -333,6 +333,158 @@ export const learningTracks: LearningTrack[] = [
       },
     ],
   },
+  {
+    id: "vault-secret-injection",
+    slug: "hashicorp-vault-secret-injection",
+    title: "HashiCorp Vault & Kubernetes Secret Injection Mastery",
+    targetCredential: "HashiCorp Certified: Vault Operations Associate & Production Secret Management",
+    category: "Security",
+    status: "Active / In Progress",
+    level: "Specialist",
+    curriculumVersion: "2025/2026 Production Vault & Cloud-Native Security Standard",
+    summary:
+      "Production-grade study plan for centralized secrets management, dynamic credential generation, and zero-trust secret delivery into Kubernetes workloads. Covers Vault HA clustering on Raft storage, Kubernetes Auth Method, Vault Agent Sidecar Injector, External Secrets Operator (ESO), transit data encryption, and automated PKI / mTLS certificate lifecycle.",
+    topicsList: [
+      "Vault Architecture, High Availability (Raft) & Seal Governance",
+      "Kubernetes Authentication & Mutual Workload Identity",
+      "Vault Agent Sidecar Injector & In-Memory Secret Templating",
+      "External Secrets Operator (ESO) & GitOps Synchronization",
+      "Dynamic Secrets, Database Engines, PKI & Transit Encryption",
+    ],
+    coreCompetencies: [
+      "High Availability Vault Clustering with Integrated Raft Storage & Auto-Unseal (AWS KMS / Transit Vault)",
+      "Kubernetes ServiceAccount JWT Validation & Least-Privilege Vault ACL Policies",
+      "Zero-Disk Secret Injection using Vault Agent Sidecar Annotations & Consul Template",
+      "External Secrets Operator (ESO) ClusterSecretStore Synchronization with GitOps",
+      "Short-Lived Dynamic Database Credentials with Automatic Lease Revocation & Rotation",
+      "Automated Internal PKI Engine & Mutual TLS (mTLS) Certificate Lifecycle",
+    ],
+    officialReference: {
+      name: "HashiCorp Vault Kubernetes Documentation",
+      url: "https://developer.hashicorp.com/vault/docs/platform/k8s",
+    },
+    relatedBlogSlug: "devsecops-pipeline-security",
+    modules: [
+      {
+        id: "vault-mod-1",
+        number: 1,
+        stepNumber: "Step 01",
+        title: "Vault Architecture, Clustering & Auto-Unseal Governance",
+        focusArea: "Control Plane Architecture & Cryptographic Storage",
+        summary:
+          "Deploy production-grade Vault HA clusters backed by integrated Raft consensus storage, configure automated unsealing via Cloud KMS or Transit Vault, and author granular least-privilege ACL policies.",
+        objectives: [
+          "Bootstrap a production-grade multi-node Vault cluster utilizing the integrated Raft consensus storage backend.",
+          "Implement cloud auto-unseal (AWS KMS / Transit Vault) eliminating Shamir key operational friction during pod restarts.",
+          "Author granular, path-based HCL ACL policies enforcing least-privilege access for operators and workloads.",
+          "Enable tamper-evident audit logging devices streaming to centralized log collection pipelines.",
+        ],
+        labScenario:
+          "Initialize a 3-node HA Vault Raft cluster with automated KMS unseal; simulate node failure, verify Raft leader election without service downtime, and inspect tamper-evident audit logs.",
+        keyCommandsOrTools: [
+          "vault operator init / raft list-peers",
+          "vault policy write <name> policy.hcl",
+          "vault audit enable file file_path=/vault/audit/vault.log",
+          "vault status",
+        ],
+      },
+      {
+        id: "vault-mod-2",
+        number: 2,
+        stepNumber: "Step 02",
+        title: "Kubernetes Authentication Engine & Workload Identity",
+        focusArea: "Zero-Trust Identity & Token Exchange",
+        summary:
+          "Establish zero-trust authentication between Kubernetes and Vault using the Kubernetes Auth Method, validating Pod ServiceAccount JWT tokens with API Server TokenReview.",
+        objectives: [
+          "Enable and configure the Vault Kubernetes Auth Method with TokenReview API validation.",
+          "Map Kubernetes ServiceAccounts and Namespaces to targeted Vault roles and ACL policies.",
+          "Implement short-lived token issuance with strictly bounded TTLs and renewal mechanisms.",
+          "Harden communication with TLS verification and cluster CA trust certificates.",
+        ],
+        labScenario:
+          "Configure the Kubernetes Auth Method against a target namespace; configure a microservice ServiceAccount, perform token exchange via CLI, and verify that unauthorized ServiceAccounts receive 403 Forbidden.",
+        keyCommandsOrTools: [
+          "vault auth enable kubernetes",
+          "vault write auth/kubernetes/config ...",
+          "vault write auth/kubernetes/role/<role_name> ...",
+          "vault login -method=kubernetes role=...",
+        ],
+      },
+      {
+        id: "vault-mod-3",
+        number: 3,
+        stepNumber: "Step 03",
+        title: "Vault Agent Sidecar Injector & In-Memory Secrets",
+        focusArea: "Sidecar Injection & Zero-Disk Exposure",
+        summary:
+          "Inject secrets directly into application Pods via mutating admission webhooks, rendering confidential variables into ephemeral shared memory volumes without ever writing to persistent disk.",
+        objectives: [
+          "Deploy and configure the Vault Helm chart with the Vault Agent Sidecar Injector controller.",
+          "Leverage Pod annotations (vault.hashicorp.com/*) to drive automated sidecar and init-container injection.",
+          "Render custom application config files and environment variables using Consul Template syntax.",
+          "Configure automatic secret reloads upon rotation using signals (vault.hashicorp.com/agent-inject-command).",
+          "Enforce in-memory emptyDir: { medium: Memory } mounts to prevent confidential tokens from persisting to node disk.",
+        ],
+        labScenario:
+          "Annotate a production web deployment to inject database credentials directly into /vault/secrets/config.json; update the secret in Vault and verify the sidecar agent automatically fetches the new secret and signals the application container.",
+        keyCommandsOrTools: [
+          "vault.hashicorp.com/agent-inject: 'true'",
+          "vault.hashicorp.com/role: 'api-service'",
+          "vault.hashicorp.com/agent-inject-template: '...'",
+          "vault.hashicorp.com/agent-inject-command: 'kill -HUP 1'",
+        ],
+      },
+      {
+        id: "vault-mod-4",
+        number: 4,
+        stepNumber: "Step 04",
+        title: "External Secrets Operator (ESO) & Declarative GitOps",
+        focusArea: "Kubernetes-Native Secrets & GitOps Integration",
+        summary:
+          "Synchronize confidential values directly into native Kubernetes Secrets using the External Secrets Operator (ESO), enabling safe declarative GitOps workflows with ArgoCD.",
+        objectives: [
+          "Deploy and manage the External Secrets Operator (ESO) via Helm in a production cluster.",
+          "Configure ClusterSecretStore and SecretStore CRDs targeting Vault engines.",
+          "Define ExternalSecret CRDs specifying secret mapping, key extraction, and sync intervals.",
+          "Integrate with ArgoCD without committing sensitive credentials or raw Secret manifests into Git.",
+          "Configure Secret deletion policies and lifecycle reconciliation to eliminate orphaned credentials.",
+        ],
+        labScenario:
+          "Create a ClusterSecretStore authenticated to Vault; declare an ExternalSecret targeting sensitive API tokens, sync via ArgoCD, and verify the resulting native Kubernetes Secret is created and refreshed on rotation.",
+        keyCommandsOrTools: [
+          "kubectl get clustersecretstore,externalsecret",
+          "apiVersion: external-secrets.io/v1beta1",
+          "secretStoreRef / remoteRef / refreshInterval",
+          "kubectl describe externalsecret <name>",
+        ],
+      },
+      {
+        id: "vault-mod-5",
+        number: 5,
+        stepNumber: "Step 05",
+        title: "Dynamic Secrets, Database Rotation, PKI & Transit Encryption",
+        focusArea: "Ephemeral Credentials, mTLS & Encryption as a Service",
+        summary:
+          "Eliminate static, permanent credentials by implementing dynamic on-demand database credentials with automatic lease revocations, automated internal PKI certificate authority, and Transit encryption.",
+        objectives: [
+          "Configure Vault Database Secrets Engines (PostgreSQL / MySQL) generating unique, short-lived user roles for every workload instance.",
+          "Automate lease expiration and proactive credential revocation upon pod termination.",
+          "Establish an internal Private Key Infrastructure (PKI) secrets engine issuing on-demand TLS/mTLS certificates with cert-manager.",
+          "Utilize the Vault Transit Secrets Engine for Cryptography-as-a-Service (envelope encryption) without exposing raw encryption keys to application developers.",
+        ],
+        labScenario:
+          "Configure the PostgreSQL secrets engine; trigger an application to request temporary DB credentials with a 1-hour lease; verify the dynamic role exists in Postgres, wait for TTL expiry, and verify Vault automatically drops the role.",
+        keyCommandsOrTools: [
+          "vault secrets enable database",
+          "vault write database/config/postgres ...",
+          "vault write database/roles/app-role ...",
+          "vault read database/creds/app-role",
+          "vault secrets enable pki / transit",
+        ],
+      },
+    ],
+  },
 ];
 
 export const allCategories: LearningCategory[] = [
