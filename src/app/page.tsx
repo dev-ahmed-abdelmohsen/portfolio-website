@@ -288,22 +288,30 @@ export default function AboutPage() {
           ))}
         </div>
 
-        {/* Link to Learning Paths */}
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/20 bg-primary/5 p-4 text-xs">
-          <div className="flex items-center gap-2">
-            <GraduationCap className="h-5 w-5 text-primary" />
+        {/* Link to Shams Systems Sandbox */}
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/30 bg-primary/5 p-4 text-xs">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <Terminal className="h-5 w-5" />
+            </div>
             <div>
-              <p className="font-bold text-foreground">Explore Hands-On Study Blueprints</p>
-              <p className="text-muted-foreground">Syllabus &amp; production labs for CKA, ArgoCD GitOps, and HashiCorp Vault.</p>
+              <p className="font-bold text-foreground">
+                Shams Systems Sandbox <span className="font-mono text-primary font-normal">· sandbox.shams.systems</span>
+              </p>
+              <p className="text-muted-foreground">
+                Dedicated technical playground: production study blueprints, interactive lab scenarios, and experimental architectures.
+              </p>
             </div>
           </div>
-          <Link
-            href="/learning"
+          <a
+            href="https://sandbox.shams.systems"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-1 font-semibold text-primary hover:underline shrink-0"
           >
-            <span>View Learning Path</span>
+            <span>Launch Sandbox</span>
             <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
+          </a>
         </div>
       </section>
     </div>

@@ -1,14 +1,13 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog";
 import { projects } from "@/data/portfolio";
-import { learningTracks } from "@/data/learning";
 
 const BASE_URL = "https://shams.systems";
 
 /**
  * sitemap.ts — Generates /sitemap.xml for all static routes.
  *
- * All blog articles, portfolio topics, and learning study plans are statically
+ * All blog articles and portfolio topics are statically
  * generated with dedicated deep-dive pages.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -31,12 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/learning`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.85,
     },
     {
       url: `${BASE_URL}/blog`,
@@ -74,15 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // ── Dynamic learning study plan routes ─────────────────────────────────
-  const learningRoutes: MetadataRoute.Sitemap = learningTracks.map((track) => ({
-    url: `${BASE_URL}/learning/${track.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  }));
-
-  return [...staticRoutes, ...blogRoutes, ...portfolioRoutes, ...learningRoutes];
+  return [...staticRoutes, ...blogRoutes, ...portfolioRoutes];
 }
 
 
