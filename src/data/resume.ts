@@ -1,35 +1,21 @@
 export const experiences = [
   {
-    period: "2025 – Present",
+    period: "Apr 2026 – Present",
     title: "DevOps Engineer",
     company: "Fixed Misr (FEDIS)",
     description:
-      "Architecting reliable cloud environments, automating declarative CI/CD delivery pipelines, and enforcing security and high-availability standards.",
+      "Architecting on-premises infrastructure environments, managing private virtualization platforms, and automating enterprise delivery pipelines with high-availability standards.",
   },
   {
-    period: "Jan 2026 – Present",
-    title: "Cloud DevOps Intern",
-    company: "Ivolve Technologies / NTI Hire Ready Program",
-    description:
-      "Working on cloud infrastructure delivery, deployment automation, and container orchestration in a collaborative DevOps environment.",
-  },
-  {
-    period: "Oct 2025 – Present",
-    title: "Freelance Systems Administrator & DevOps",
-    company: "Self-Employed",
-    description:
-      "Delivering cloud infrastructure automation, server reliability management, and DevOps advisory for multiple engineering teams.",
-  },
-  {
-    period: "May 2025 – Oct 2025",
-    title: "DevOps Engineer",
+    period: "May 2025 – Present",
+    title: "Backend & DevOps Engineer",
     company: "Stealth Automotive Startup",
     description:
-      "Engineered automated release pipelines, containerized core microservices, and managed scalable cloud platforms.",
+      "Developing resilient backend microservices, engineering automated CI/CD release pipelines, and maintaining scalable cloud platforms for connected vehicle services.",
   },
   {
     period: "Mar 2024 – Sep 2024",
-    title: "DevOps Trainee",
+    title: "Cloud & Systems Engineering Trainee",
     company: "Digital Egypt Pioneers Initiative (DEPI)",
     description:
       "Intensive specialization in cloud architecture, Linux systems engineering, container platforms, and infrastructure automation.",
@@ -37,7 +23,7 @@ export const experiences = [
   {
     period: "Jun 2023 – Sep 2023",
     title: "Cybersecurity Trainee",
-    company: "EELU",
+    company: "Egyptian E-Learning University (EELU)",
     description:
       "Applied security engineering focusing on network defense, vulnerability assessment, and infrastructure hardening.",
   },
