@@ -16,9 +16,9 @@ export const profile = {
   location: "Cairo, Egypt",
   cvUrl: "/resume",
   status: "Operational",
-  bio: `DevOps & Hybrid Infrastructure Engineer specializing in on-premises enterprise infrastructure, private cloud platforms, and automated delivery pipelines.
+  bio: `DevOps & Hybrid Infrastructure Engineer specializing in on-premises enterprise platforms, private cloud infrastructure, and declarative GitOps delivery.
 
-Experienced in deploying and managing physical and virtual infrastructure, orchestrating enterprise container workloads with Kubernetes, and provisioning environments via Infrastructure as Code. Passionate about modern automation—building event-driven workflows with n8n and AI integrations via Model Context Protocol (MCP) alongside robust DevSecOps and full-stack observability.`,
+Operating at Fixed Misr (FEDIS), I engineer resilient physical and virtualized systems, automate containerized workloads with Kubernetes, and provision reproducible environments with Infrastructure as Code. Beyond traditional operations, I build modern automation pipelines—orchestrating event-driven workflows with n8n and developing AI agent integrations via the Model Context Protocol (MCP) to eliminate operational toil.`,
   socialLinks: {
     github: "https://github.com/dev-ahmed-abdelmohsen",
     linkedin: "https://www.linkedin.com/in/dev-ahmed-abdelmohsen",
