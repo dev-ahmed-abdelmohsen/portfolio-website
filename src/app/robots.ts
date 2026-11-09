@@ -9,7 +9,7 @@ import { MetadataRoute } from "next";
  *    by ChatGPT, Claude, Perplexity, and other generative engines.
  */
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = "https://ahmed-abd-elmohsen.tech";
+  const siteUrl = "https://shams.systems";
 
   return {
     rules: [

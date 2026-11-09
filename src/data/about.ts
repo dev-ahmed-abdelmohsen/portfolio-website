@@ -1,28 +1,28 @@
-import { Cloud, Container, Activity, Code } from "lucide-react";
+import { Server, Container, ShieldCheck, Workflow } from "lucide-react";
 
 export const focusAreas = [
   {
+    icon: Server,
+    title: "On-Premises & Hybrid Infrastructure",
+    description:
+      "Architecting reliable on-premises data centers, virtualization platforms, and hybrid cloud topologies with automated infrastructure provisioning.",
+  },
+  {
     icon: Container,
-    title: "DevOps",
+    title: "Continuous Delivery & GitOps",
     description:
-      "I enjoy to improve the speed and quality of delivery, automate and achieve CI/CD pipelines with modern tooling.",
+      "Accelerating release velocity and operational consistency through declarative GitOps synchronization and automated CI/CD pipelines (e.g. ArgoCD).",
   },
   {
-    icon: Cloud,
-    title: "Cloud Engineer",
+    icon: Workflow,
+    title: "Workflow & AI Automation (n8n & MCP)",
     description:
-      "I enjoy design, secure and maintenance of an organization's cloud-based infrastructure and application on AWS.",
+      "Orchestrating event-driven workflows with n8n and building Model Context Protocol (MCP) tool integrations to automate engineering tasks.",
   },
   {
-    icon: Activity,
-    title: "SRE",
+    icon: ShieldCheck,
+    title: "DevSecOps & Full-Stack Observability",
     description:
-      "I curious the processes and tools that ensure the scalability, reliability and availability of software systems.",
-  },
-  {
-    icon: Code,
-    title: "Software Development",
-    description:
-      "I enjoy learning software development either for personal or specific purposes — Back-end & Full-stack Java.",
+      "Embedding shift-left security verification and comprehensive telemetry (metrics & logs) to maintain operational health and compliance.",
   },
 ] as const;

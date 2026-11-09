@@ -1,6 +1,6 @@
 import { profile } from "@/data/profile";
 import { focusAreas } from "@/data/about";
-import { Cloud, Code, Server, BookOpen } from "lucide-react";
+import { Cloud, Code, Server, BookOpen, Activity, Database } from "lucide-react";
 
 export default function AboutPage() {
   return (
@@ -9,9 +9,9 @@ export default function AboutPage() {
           1. ABOUT — primary identity + bio
       ═══════════════════════════════════════════════ */}
       <section aria-labelledby="about-heading">
-        <h2 id="about-heading" className="text-3xl font-bold tracking-tight">
+        <h1 id="about-heading" className="text-3xl font-bold tracking-tight">
           About Me
-        </h2>
+        </h1>
         <div className="mt-2 h-1 w-10 rounded-full bg-primary" />
 
         <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
@@ -32,7 +32,7 @@ export default function AboutPage() {
           {focusAreas.map(({ icon: Icon, title, description }) => (
             <article
               key={title}
-              className="group rounded-xl border border-border bg-secondary/40 p-5 transition-colors hover:border-primary/30 hover:bg-secondary/70"
+              className="group rounded-xl border border-border bg-card p-5 shadow-sm transition-all hover:border-primary/40 hover:bg-secondary/50 dark:bg-secondary/40 dark:shadow-none dark:hover:bg-secondary/70"
             >
               <div className="mb-3 flex items-center justify-center">
                 <Icon className="h-8 w-8 text-primary transition-transform duration-200 group-hover:scale-110" />
@@ -47,8 +47,116 @@ export default function AboutPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════
-          3. KEY PROJECTS — Answer-First / GEO-optimized
-             Factual, entity-dense, directly quotable
+          3. OBSERVABILITY — MONITORING & LOGGING PARTITION
+      ═══════════════════════════════════════════════ */}
+      <section aria-labelledby="observability-heading" className="mt-10">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h3 id="observability-heading" className="text-xl font-bold tracking-tight">
+              Observability &amp; Telemetry
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Enterprise telemetry architectures ensuring operational visibility, service reliability, and proactive alerting.
+            </p>
+          </div>
+          <span className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+            Full-Stack Observability
+          </span>
+        </div>
+
+        <div className="mt-5 grid gap-5 lg:grid-cols-2">
+          {/* Card 1: Metrics & Alerting */}
+          <article
+            aria-label="Metrics and Alerting Architecture"
+            className="group rounded-xl border border-border bg-card p-5 shadow-sm transition-all hover:border-primary/40 hover:bg-secondary/50 dark:bg-secondary/40 dark:shadow-none dark:hover:bg-secondary/60"
+          >
+            <div className="flex items-center justify-between border-b border-border/50 pb-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-orange-500/15 text-orange-600 dark:bg-orange-500/10 dark:text-orange-400">
+                  <Activity className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-base font-bold text-foreground">
+                    Metrics &amp; Telemetry Architecture
+                  </h4>
+                  <p className="text-xs font-medium text-orange-600 dark:text-orange-400">
+                    Real-time Telemetry &amp; Alerting (e.g. Prometheus, Grafana)
+                  </p>
+                </div>
+              </div>
+              <span className="rounded-md border border-orange-500/30 bg-orange-500/15 px-2 py-0.5 text-[10px] font-semibold text-orange-600 uppercase tracking-wider dark:border-orange-500/20 dark:bg-orange-500/10 dark:text-orange-400">
+                Metrics
+              </span>
+            </div>
+
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              Time-series telemetry infrastructure providing continuous visibility into system health, performance trends, and Service Level Objectives (SLOs).
+            </p>
+
+            <div className="mt-4 space-y-2 text-xs text-muted-foreground">
+              <div className="flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-600 dark:bg-orange-400" />
+                <span>
+                  <strong className="text-foreground">Proactive Alerting &amp; Routing:</strong> Actionable notification channels and deduplication rules for rapid incident escalation.
+                </span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-600 dark:bg-orange-400" />
+                <span>
+                  <strong className="text-foreground">Executive &amp; Operational Dashboards:</strong> Unified visualization of throughput, latency, and error budgets across services.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          {/* Card 2: Centralized Logging */}
+          <article
+            aria-label="Centralized Logging Architecture"
+            className="group rounded-xl border border-border bg-card p-5 shadow-sm transition-all hover:border-primary/40 hover:bg-secondary/50 dark:bg-secondary/40 dark:shadow-none dark:hover:bg-secondary/60"
+          >
+            <div className="flex items-center justify-between border-b border-border/50 pb-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-700 dark:bg-cyan-500/10 dark:text-cyan-400">
+                  <Database className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="text-base font-bold text-foreground">
+                    Centralized Log Management
+                  </h4>
+                  <p className="text-xs font-medium text-cyan-700 dark:text-cyan-400">
+                    Distributed Log Analytics &amp; Forensics (e.g. ELK Stack)
+                  </p>
+                </div>
+              </div>
+              <span className="rounded-md border border-cyan-500/30 bg-cyan-500/15 px-2 py-0.5 text-[10px] font-semibold text-cyan-700 uppercase tracking-wider dark:border-cyan-500/20 dark:bg-cyan-500/10 dark:text-cyan-400">
+                Logging
+              </span>
+            </div>
+
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              High-throughput log aggregation pipeline delivering rapid distributed troubleshooting, anomaly detection, and comprehensive audit trails.
+            </p>
+
+            <div className="mt-4 space-y-2 text-xs text-muted-foreground">
+              <div className="flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-700 dark:bg-cyan-400" />
+                <span>
+                  <strong className="text-foreground">Distributed Search &amp; Discovery:</strong> Real-time querying enabling fast root-cause isolation across distributed microservices.
+                </span>
+              </div>
+              <div className="flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-700 dark:bg-cyan-400" />
+                <span>
+                  <strong className="text-foreground">Lifecycle &amp; Retention Governance:</strong> Automated indexing tiers and retention policies balancing query performance with storage efficiency.
+                </span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════
+          4. KEY PROJECTS — High-Level Architectural Highlights
       ═══════════════════════════════════════════════ */}
       <section aria-labelledby="projects-heading" className="mt-10">
         <h3 id="projects-heading" className="text-xl font-bold tracking-tight">
@@ -56,10 +164,10 @@ export default function AboutPage() {
         </h3>
         <div className="mt-4 space-y-4">
 
-          {/* PetClinic AWS Infrastructure */}
+          {/* AWS Cloud Architecture Project */}
           <article
-            aria-label="PetClinic High-Availability AWS Infrastructure"
-            className="rounded-xl border border-border bg-secondary/40 p-5"
+            aria-label="AWS High-Availability Cloud Architecture"
+            className="rounded-xl border border-border bg-card p-5 shadow-sm dark:bg-secondary/40 dark:shadow-none"
           >
             <header className="mb-3 flex items-center gap-3">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
@@ -67,48 +175,30 @@ export default function AboutPage() {
               </div>
               <div>
                 <h4 className="text-base font-semibold">
-                  PetClinic — High-Availability AWS Infrastructure
+                  AWS Multi-Tier Architecture &amp; Solutions Design
                 </h4>
                 <p className="text-xs text-muted-foreground">
-                  AWS · EC2 · VPC · Auto Scaling · Load Balancer · Terraform
+                  AWS Solutions Architecture · High Availability · Infrastructure as Code
                 </p>
               </div>
             </header>
-            {/* Answer-first paragraph: direct, factual summary for LLM extraction */}
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Ahmed architected and deployed a production-grade, high-availability web
-              infrastructure on AWS for the{" "}
-              <strong className="text-foreground">Spring PetClinic application</strong>. The
-              architecture uses multi-AZ{" "}
-              <strong className="text-foreground">Amazon EC2 instances</strong> inside a custom{" "}
-              <strong className="text-foreground">VPC</strong> with public and private subnets,
-              an{" "}
-              <strong className="text-foreground">Application Load Balancer (ALB)</strong> for
-              traffic distribution, and{" "}
-              <strong className="text-foreground">Auto Scaling Groups (ASG)</strong> for dynamic
-              horizontal scaling under variable load. Infrastructure is provisioned entirely via{" "}
-              <strong className="text-foreground">Terraform</strong> (Infrastructure as Code).
+              Ahmed Shams architected and deployed a production-grade cloud environment on AWS aligned with the{" "}
+              <strong className="text-foreground">AWS Solutions Architecture</strong> and Well-Architected Framework principles. The design ensures fault tolerance, automated elasticity under variable demand, and strict security isolation, provisioned entirely through{" "}
+              <strong className="text-foreground">Infrastructure as Code</strong> (e.g. Terraform).
             </p>
             <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
               <li className="flex items-start gap-2">
                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                Designed a multi-AZ VPC with isolated public/private subnets and NAT gateways for
-                secure outbound traffic from private instances.
+                Designed a fault-tolerant multi-zone cloud topology with segregated public and private network layers.
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                Configured an Auto Scaling Group with dynamic scaling policies (CPU-utilization
-                target tracking) across two Availability Zones.
+                Configured automated horizontal scaling and intelligent traffic balancing to adapt dynamically to load shifts.
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                Provisioned an Application Load Balancer with health checks and HTTP→HTTPS
-                redirection rules.
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                Entire infrastructure defined as code using Terraform modules — enabling
-                repeatable, version-controlled deployments.
+                Enforced declarative infrastructure definitions for repeatable, version-controlled cloud environments.
               </li>
             </ul>
           </article>
@@ -132,7 +222,7 @@ export default function AboutPage() {
               </div>
             </header>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Ahmed is currently completing the{" "}
+              Ahmed Shams is currently completing the{" "}
               <strong className="text-foreground">NTI Hire Ready track</strong> for DevOps and
               Cloud Engineering at the{" "}
               <strong className="text-foreground">
@@ -166,22 +256,18 @@ export default function AboutPage() {
               </div>
               <div>
                 <h4 className="text-base font-semibold">
-                  Guest Lecture on DevOps — The Chinese University in Cairo
+                  Technical Talk on DevOps — The Chinese University in Cairo
                 </h4>
                 <p className="text-xs text-muted-foreground">
-                  3,500 Students · DevOps Culture & Practices
+                  Student Engineering Community · DevOps Culture &amp; Practices
                 </p>
               </div>
             </header>
-            {/* Highly specific facts — prime extraction targets for LLMs */}
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Ahmed delivered a guest lecture on{" "}
-              <strong className="text-foreground">DevOps principles, culture, and tooling</strong>{" "}
-              to an audience of{" "}
-              <strong className="text-foreground">3,500 students</strong> at{" "}
-              <strong className="text-foreground">The Chinese University in Cairo</strong>. The
-              session covered the DevOps lifecycle, CI/CD pipeline design, containerization with
-              Docker and Kubernetes, and cloud-native deployment strategies on AWS.
+              Ahmed Shams delivered a technical talk on{" "}
+              <strong className="text-foreground">DevOps culture, automation pipelines, and infrastructure practices</strong>{" "}
+              to engineering students at{" "}
+              <strong className="text-foreground">The Chinese University in Cairo</strong>, covering containerization, continuous delivery workflows, and modern cloud-native architectures.
             </p>
           </article>
 
@@ -202,7 +288,7 @@ export default function AboutPage() {
               </div>
             </header>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Ahmed holds a{" "}
+              Ahmed Shams holds a{" "}
               <strong className="text-foreground">
                 Bachelor of Science in Information Technology
               </strong>{" "}

@@ -568,7 +568,7 @@ stage('Deploy') {
   parallel {
     stage('Unit Tests')    { steps { sh 'make test-unit' } }
     stage('Lint')          { steps { sh 'make lint' } }
-    stage('SAST Scan')     { steps { sh 'make snyk-test' } }
+    stage('SAST Scan')     { steps { sh 'make semgrep-test' } }
     stage('License Check') { steps { sh 'make license-check' } }
   }
 }`,
@@ -755,5 +755,353 @@ spec:
       },
     ],
   },
+  {
+    slug: "gitops-with-argocd-kubernetes",
+    title: "GitOps in Practice: Declarative Kubernetes Delivery with ArgoCD",
+    excerpt:
+      "A complete guide to continuous deployment, automated drift reconciliation, and multi-environment GitOps using ArgoCD and Helm.",
+    date: "2026-02-18",
+    tags: ["GitOps", "Kubernetes", "DevOps"],
+    readTime: "9 min read",
+    content: [
+      {
+        type: "paragraph",
+        text: "GitOps is an operational framework that takes DevOps best practices used for application development — such as version control, collaboration, compliance, and CI/CD — and applies them to modern cloud infrastructure automation.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "In a true GitOps workflow, Git is the single source of truth for your entire cluster state. Direct manual changes via kubectl are strictly discouraged or automatically reverted.",
+      },
+      {
+        type: "heading",
+        text: "The Four Principles of GitOps",
+      },
+      {
+        type: "list",
+        items: [
+          "Declarative Descriptions: The entire system is described declaratively in Git (Kubernetes YAML, Helm, Kustomize).",
+          "Versioned & Immutable: Desired state is stored in Git, offering complete audit logs and one-click rollback.",
+          "Pulled Automatically: Software agents (like ArgoCD) continuously pull desired state rather than CI pushing blindly.",
+          "Continuously Reconciled: Software agents continuously observe live cluster state and reconcile differences automatically.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Installing ArgoCD on Kubernetes",
+      },
+      {
+        type: "code",
+        language: "bash",
+        text: `# Create namespace and install ArgoCD
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# Access the ArgoCD Web UI locally
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+# Retrieve initial admin password
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo`,
+      },
+      {
+        type: "heading",
+        text: "Defining an ArgoCD Application Manifest",
+      },
+      {
+        type: "paragraph",
+        text: "Rather than creating apps via the UI, GitOps teams define Application Custom Resources (CRDs) stored directly in git:",
+      },
+      {
+        type: "code",
+        language: "yaml",
+        text: `apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: petclinic-production
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/my-org/gitops-manifests.git'
+    targetRevision: HEAD
+    path: environments/production/petclinic
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true`,
+      },
+      {
+        type: "callout",
+        variant: "tip",
+        text: "Enabling selfHeal ensures that if someone manually alters a deployment in production, ArgoCD detects the configuration drift and reverts it to the Git-defined spec within seconds.",
+      },
+      {
+        type: "heading",
+        text: "Multi-Environment Directory Strategy",
+      },
+      {
+        type: "paragraph",
+        text: "Organizing your GitOps repository with Kustomize overlays allows sharing base manifests while overriding replicas, resource limits, and secrets per environment (dev, staging, prod).",
+      },
+      {
+        type: "quote",
+        text: "With GitOps, recovering from cluster disasters transforms from hours of emergency fire-fighting into a single git revert and automated ArgoCD sync.",
+        author: "DevOps Best Practices",
+      },
+    ],
+  },
+  {
+    slug: "devsecops-pipeline-security",
+    title: "DevSecOps: Shift-Left Security in Modern CI/CD Pipelines",
+    excerpt:
+      "Automating SAST, container vulnerability scanning with Grype, secrets detection, and compliance gates without breaking developer velocity.",
+    date: "2026-02-22",
+    tags: ["DevSecOps", "Security", "CI/CD"],
+    readTime: "8 min read",
+    content: [
+      {
+        type: "paragraph",
+        text: "Traditional security was treated as a gatekeeper at the very end of the release lifecycle, causing friction and delayed shipping. DevSecOps shifts security left — baking automated security checks directly into the developer workflow from the very first commit.",
+      },
+      {
+        type: "heading",
+        text: "The DevSecOps Toolchain Layers",
+      },
+      {
+        type: "list",
+        items: [
+          "Pre-Commit: Gitleaks / detect-secrets to prevent credentials and API keys from entering git history.",
+          "SAST (Static Application Security Testing): Semgrep and SonarQube analyzing source code for injection and logic flaws.",
+          "SCA (Software Composition Analysis): OWASP Dependency-Check and Dependabot identifying vulnerable third-party dependencies.",
+          "Container Scanning: Grype and Clair scanning Docker images and base layers before push to registry.",
+          "DAST (Dynamic Application Security Testing): OWASP ZAP scanning staging endpoints for runtime vulnerabilities.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Integrating Grype into GitHub Actions / Jenkins",
+      },
+      {
+        type: "paragraph",
+        text: "Here is how to automate container vulnerability scanning, failing the pipeline only on CRITICAL and HIGH CVEs with available fixes:",
+      },
+      {
+        type: "code",
+        language: "yaml",
+        text: `- name: Run Grype Vulnerability Scanner
+  uses: anchore/scan-action@v3
+  with:
+    image: 'registry.mycompany.com/app:\${{ github.sha }}'
+    fail-build: true
+    severity-cutoff: high
+    only-fixed: true`,
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Never fail builds on UNFIXED vulnerabilities unless you have a dedicated remediation plan. Failing on vulnerabilities with no existing patch stalls development without adding security.",
+      },
+      {
+        type: "heading",
+        text: "Runtime Security & Admission Control",
+      },
+      {
+        type: "paragraph",
+        text: "Securing the CI/CD pipeline is only half the battle. Kubernetes admission controllers like Kyverno or OPA Gatekeeper ensure that only signed images and non-root containers can ever be scheduled in production clusters.",
+      },
+      {
+        type: "quote",
+        text: "Security is not a blocker to speed; well-automated security gives engineering teams the confidence to deploy ten times a day.",
+      },
+    ],
+  },
+  {
+    slug: "mlops-infrastructure-kubernetes",
+    title: "MLOps on Kubernetes: Scalable AI Model Training & Deployment",
+    excerpt:
+      "Architecting resilient infrastructure for machine learning workflows: model registries, automated inference scaling, and GPU management on K8s.",
+    date: "2026-02-28",
+    tags: ["MLOps", "Kubernetes", "Cloud"],
+    readTime: "11 min read",
+    content: [
+      {
+        type: "paragraph",
+        text: "Deploying a machine learning model is easy; maintaining, retraining, monitoring, and scaling an AI workload in production without technical debt is where MLOps becomes crucial. MLOps bridges the gap between Data Science and SRE.",
+      },
+      {
+        type: "heading",
+        text: "The MLOps Lifecycle Architecture",
+      },
+      {
+        type: "list",
+        items: [
+          "Feature Store & Data Ingestion: Standardized feature engineering pipelines with Feast.",
+          "Orchestrated Training: Distributed model training on Kubernetes nodes using Kubeflow Pipelines or Ray.",
+          "Model Registry & Experiment Tracking: MLflow storing versioned model artifacts and training hyper-parameters.",
+          "Inference Serving: KServe, Triton, or vLLM providing dynamic auto-scaling and GPU sharing.",
+          "Observability & Drift Detection: Prometheus and Evidently AI tracking model accuracy degradation and data drift in production.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Declarative Model Serving with KServe",
+      },
+      {
+        type: "code",
+        language: "yaml",
+        text: `apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "sentiment-classifier"
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: "s3://ml-model-registry/sentiment/v2.1"
+      resources:
+        requests:
+          cpu: "2"
+          memory: "4Gi"
+        limits:
+          cpu: "4"
+          memory: "8Gi"
+          nvidia.com/gpu: "1"`,
+      },
+      {
+        type: "callout",
+        variant: "tip",
+        text: "Scale-to-zero capabilities with Knative / KServe drastically reduce cloud GPU costs during off-peak hours while auto-scaling to dozens of replicas during inference traffic spikes.",
+      },
+      {
+        type: "quote",
+        text: "Without solid MLOps, 85% of machine learning projects never make it out of a Jupyter notebook into production.",
+      },
+    ],
+  },
+  {
+    slug: "logging-with-elasticsearch-kibana",
+    title: "Centralized Logging on Kubernetes: Elasticsearch, Filebeat & Kibana",
+    excerpt:
+      "A complete guide to architecting a production ELK logging pipeline: DaemonSet log collectors, Index Lifecycle Management (ILM), and Kibana analytics.",
+    date: "2026-03-02",
+    tags: ["Monitoring", "Kubernetes", "DevOps"],
+    readTime: "9 min read",
+    content: [
+      {
+        type: "paragraph",
+        text: "In distributed microservices running on Kubernetes, tracking down bugs by running 'kubectl logs' on individual ephemeral pods is impossible. A centralized logging pipeline with Elasticsearch and Kibana aggregates all stdout/stderr streams into a single, searchable repository.",
+      },
+      {
+        type: "heading",
+        text: "The ELK Logging Architecture on Kubernetes",
+      },
+      {
+        type: "list",
+        items: [
+          "Collection Layer (Filebeat / Fluent Bit): Runs as a DaemonSet on every node, tailing container log files from /var/log/containers/*.",
+          "Enrichment: Appends Kubernetes metadata (namespace, pod name, container name, labels) to every log event.",
+          "Storage Layer (Elasticsearch): Distributed cluster storing inverted index documents with sharding and replication.",
+          "Visualization Layer (Kibana): Web interface for interactive KQL querying, histogram analysis, and alerting dashboards.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "Index Lifecycle Management (ILM)",
+      },
+      {
+        type: "paragraph",
+        text: "Uncontrolled logging easily fills multi-terabyte disks. ILM automates index rollouts across hot, warm, and cold storage tiers:",
+      },
+      {
+        type: "code",
+        language: "json",
+        text: `{
+  "policy": {
+    "phases": {
+      "hot": {
+        "actions": {
+          "rollover": {
+            "max_primary_shard_size": "50GB",
+            "max_age": "7d"
+          }
+        }
+      },
+      "warm": {
+        "min_age": "7d",
+        "actions": {
+          "shrink": { "number_of_shards": 1 },
+          "forcemerge": { "max_num_segments": 1 }
+        }
+      },
+      "delete": {
+        "min_age": "30d",
+        "actions": { "delete": {} }
+      }
+    }
+  }
+}`,
+      },
+      {
+        type: "callout",
+        variant: "tip",
+        text: "Setting up a 30-day delete phase guarantees your Kubernetes nodes never suffer disk pressure evictions caused by runaway debug logs.",
+      },
+      {
+        type: "heading",
+        text: "Filebeat DaemonSet Manifest",
+      },
+      {
+        type: "code",
+        language: "yaml",
+        text: `apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config
+  namespace: logging
+data:
+  filebeat.yml: |
+    filebeat.inputs:
+    - type: container
+      paths:
+        - /var/log/containers/*.log
+      processors:
+        - add_kubernetes_metadata:
+            host: \${NODE_NAME}
+            matchers:
+            - logs_path:
+                logs_path: "/var/log/containers/"
+    output.elasticsearch:
+      hosts: ["http://elasticsearch.logging.svc:9200"]
+      index: "k8s-logs-%{[agent.version]}-%{+yyyy.MM.dd}"`,
+      },
+      {
+        type: "quote",
+        text: "Observability is knowing that your systems are working; logging is knowing why they failed.",
+        author: "SRE Reliability Principles",
+      },
+    ],
+  },
 ];
+
+export const allBlogTags = [
+  "All",
+  "DevOps",
+  "Cloud",
+  "Kubernetes",
+  "Terraform",
+  "CI/CD",
+  "GitOps",
+  "DevSecOps",
+  "MLOps",
+  "Monitoring",
+] as const;
+
 

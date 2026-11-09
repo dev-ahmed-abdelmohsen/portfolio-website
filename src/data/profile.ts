@@ -1,17 +1,27 @@
 export const profile = {
-  name: "Ahmed",
-  roles: ["DevOps Engineer", "Software Engineer", "Systems Administrator"],
-  email: "ahmed@example.com",
-  location: "Egypt",
-  cvUrl: "/Ahmed_CV.pdf",
+  name: "Ahmed Shams",
+  fullName: "Ahmed Shams",
+  arabicName: "أحمد شمس",
+  brandName: "Shams Systems",
+  domain: "shams.systems",
+  url: "https://shams.systems",
+  initials: "AS",
+  alternateName: "Shams Systems",
+  roles: [
+    "DevOps & Hybrid Infrastructure",
+    "On-Premises & Private Cloud",
+    "Workflow Automation (n8n & MCP)",
+  ],
+  email: "ashams3719262@gmail.com",
+  location: "Cairo, Egypt",
+  cvUrl: "/resume",
   status: "Operational",
-  bio: `A passionate and skilled DevOps, SRE, and Cloud Engineer with a strong background in infrastructure provisioning, automation, and monitoring. I hold an IT degree from EELU (Graduated June 2025) and focus on modern cloud-native solutions.
+  bio: `DevOps & Hybrid Infrastructure Engineer specializing in on-premises enterprise infrastructure, private cloud platforms, and automated delivery pipelines.
 
-Have experience working with tools such as Jenkins, Terraform, and Ansible to streamline development processes and ensure efficient code deployment. Proficient in managing and monitoring cloud infrastructure services on AWS, as well as maintaining high availability in Kubernetes-based container clusters. Successfully implemented monitoring and logging tools like ELK, Grafana, and Datadog to ensure comprehensive visibility into system performance and implemented GitOps for managing infrastructure as code.
-
-With a focus on continuous learning and professional growth, I am committed to leveraging my skills and contributing to the success of DevOps, SRE, and cloud engineering projects.`,
+Experienced in deploying and managing physical and virtual infrastructure, orchestrating enterprise container workloads with Kubernetes, and provisioning environments via Infrastructure as Code. Passionate about modern automation—building event-driven workflows with n8n and AI integrations via Model Context Protocol (MCP) alongside robust DevSecOps and full-stack observability.`,
   socialLinks: {
-    github: "https://github.com/ahmed",
-    linkedin: "https://linkedin.com/in/ahmed",
+    github: "https://github.com/dev-ahmed-abdelmohsen",
+    linkedin: "https://www.linkedin.com/in/dev-ahmed-abdelmohsen",
   },
 } as const;
+
